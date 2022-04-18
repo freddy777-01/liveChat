@@ -1,0 +1,53 @@
+
+/* FONTS */
+@font-face {
+  font-family: fredoka;
+  src: local('fredoka'), url('../fonts/FredokaOne-Regular.ttf');
+}
+@font-face {
+  font-family: couget;
+  src: local('couget'), url('../fonts/Courgette-Regular.ttf');
+}
+@font-face {
+  font-family: kalam;
+  src: local('kalam'), url('../fonts/Kalam-Regular.ttf');
+}
+
+.input-container{
+    position: relative;
+    border-bottom: 2px solid #000000;
+    height: 3rem;
+    transition: border .3s ease;
+}
+.input-container label,input{
+    display: block;
+}
+.input-container input,textarea{
+    outline: none;
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 5px;
+    background-color: transparent;
+}
+.input-container label{
+    position: absolute;
+    pointer-events: none;
+    top: 8px;
+    left: 7px;
+    color: #969696;
+    transition: transform 0.2s ease;
+}
+.input-container input:focus + label,.input-container input:valid + label{
+    transform: translateY(-100%);
+    background-color: #ffffff;
+    color: #0a0a0a;
+}
+.focus{
+    border: 2px solid #000000;
+    border-radius: 10px;
+}
+.modal button{
+    font-family: kalam;
+    font-weight: bold;
+}

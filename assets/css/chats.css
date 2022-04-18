@@ -1,0 +1,66 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+@font-face {
+  font-family: fredoka;
+  src: local('fredoka'), url('../fonts/FredokaOne-Regular.ttf');
+}
+@font-face {
+  font-family: couget;
+  src: local('couget'), url('../fonts/Courgette-Regular.ttf');
+}
+@font-face {
+  font-family: kalam;
+  src: local('kalam'), url('../fonts/Kalam-Regular.ttf');
+}
+
+.group .groups,.group-chat{
+    border: 2px solid rebeccapurple;
+}
+.group .groups{
+    width: 40%;
+}
+.group .group-chat{
+    width: 60%;
+}
+
+.group .groups .agroup{
+    /* border: 1px solid red; */
+    width: 70%;
+    padding: 5px;
+    border-radius: 10px;
+    margin: 0px auto;
+     background-color: #ddd;
+     cursor: pointer;
+}
+.group .groups .agroup .agroup-name{
+    margin-top: 3px;
+    font-family: kalam;
+    font-size: 25px;
+}
+.group .groups .agroup .agroup-sub{
+    cursor: pointer;
+}
+.group .groups .agroup .agroup-sub:hover{
+    animation: shake 0.5s;
+  animation-iteration-count: 2;
+}
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.group .groups .agroup .agroup-icon,.agroup-sub{
+    font-size: 25px;
+}
