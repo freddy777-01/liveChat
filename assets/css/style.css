@@ -157,7 +157,7 @@ section button, section>a{
 .float-menu{
     position: absolute;
     right: 5rem;
-    top: 10%;
+    top: 2%;
 }
 .float-menu >span{
     /* border: 1px solid red; */

@@ -38,7 +38,7 @@
         </ul>
     </div>
     <main class="container">
-        <section class="group">
+        <section class="group mt-5">
             <h2>Chat groups</h2>
             <div class="d-flex">
 
@@ -76,7 +76,16 @@
                         </div>
                     </div>
                 </aside>
-                <section class="group-chat"></section>
+                <section class="group-chat px-4">
+                    <div class="receiver-msg">
+                        Lorem ipsum dolor sit amet amet, eget rhoncus, pulvinar, justo ligula.
+                        Dolor, eros ipsum odio, neque, lobortis lectus tristique dictumst id diam urna, mattis viverra id.
+                    </div>
+                    <div class="sender-msg float-end">
+                        Lorem ipsum dolor sit amet amet, eget rhoncus, pulvinar, justo ligula.
+                        Dolor, eros ipsum odio, neque, lobortis lectus tristique dictumst id diam urna, mattis viverra id.
+                    </div>
+                </section>
             </div>
         </section>
     </main>
