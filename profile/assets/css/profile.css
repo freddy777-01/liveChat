@@ -1,0 +1,85 @@
+button{
+    font-family: kalam;
+    font-weight: bold;
+}
+/* Profile */
+.profile .bio{
+    /* border: 2px solid indigo; */
+    width: 30rem;
+    padding: 5px 10px;
+    text-align: center;
+    font-family: kalam;
+    background-color: #d3d3d3;
+    border-radius: 20px;
+}
+.profile .btn .online{
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    border-radius: 50px;
+    background-color: #00d100;
+}
+.profile>.h{
+    font-size: 30px;
+}
+.profile>.h span{
+    display: inline-block;
+    margin: 0px 5px;
+}
+
+/* setting page */
+.setting .form-container input:focus{
+    border: 2px solid black;
+}
+.setting .image-block .image-input{
+    overflow: hidden;
+    position: relative;
+    height: 15rem;
+    width: 15rem;
+    border: 2px solid black;
+    border-radius: 50%;
+    margin: 0px auto;
+}
+.setting .image-block .image-input .image-icon{
+    position: absolute;
+    pointer-events: none;
+    /* background-image: url("../images/person_FILL0.svg"); */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #a1a1a1;
+    border-radius: 50%;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+.setting .image-block .image-input .image-icon .fa-icon{
+    position: absolute;
+    text-align: center;
+    font-size: 8rem;
+    width: 100%;
+    height: 100%;
+    border: 2px solid rgb(219, 255, 87);
+    left: 0;
+    z-index: 1;
+    visibility: hidden;
+    opacity: 0.2;
+}
+.setting .image-block .image-input .image-icon img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+}
+.setting .image-block .image-input input{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.setting .image-block .image-input input:hover +.image-icon .fa-icon{
+    visibility: visible;
+}

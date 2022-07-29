@@ -24,13 +24,13 @@
             </span>
             <div class="mt-5">
                 <button type="button" class="btn btn-lg btn-outline-dark mx-3">
-                    <a href="login/">
+                    <a href="forms/login/">
                         Login
                         <i class="fas fa-sign-in-alt    "></i>
                     </a>
                 </button>
                 <button type="button" class="btn btn-lg btn-outline-dark mx-2">
-                    <a href="register/">
+                    <a href="forms/register/">
                         Sign up
                     </a>
                 </button>

@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/bootstrap-5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/fontawesome-free-5/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/bootstrap-5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../assets/fontawesome-free-5/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
     <title>Login</title>
 </head>
 
@@ -17,7 +18,7 @@
             <div class="">
             </div>
             <h2 class="h text-center my-5">Login</h2>
-            <a href="../" class="btn btn-outline-dark text-decoration-none">
+            <a href="../../" class="btn btn-outline-dark text-decoration-none">
                 <i class="fa fa-home" aria-hidden="true"></i>
             </a>
         </header>

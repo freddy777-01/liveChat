@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../assets/fontawesome-free-5/css/brands.min.css">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/modalForm.css">
+    <link rel="stylesheet" href="./assets/css/profile.css">
 </head>
 
 <body>
@@ -77,7 +78,7 @@
                     <span></span>
                 </button>
                 <button type="button" class="btn btn-lg btn-outline-dark mx-2">
-                    <a href="#">
+                    <a href="./user_setting/">
                         <i class="fas fa-cog    "></i>
                     </a>
                 </button>

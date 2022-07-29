@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../assets/fontawesome-free-5/css/all.min.css">
     <link rel="stylesheet" href="../assets/fontawesome-free-5/css/brands.min.css">
     <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/chats.css">
+    <link rel="stylesheet" href="./assets/css/chats.css">
     <title>chats</title>
 </head>
 
@@ -46,7 +46,7 @@
                     <header>
                         <div class="mb-3 w-70 mx-auto d-flex align-items-center">
                             <label for="" class="form-label mx-3">Filter</label>
-                            <select class="form-control" name="" id="">
+                            <select class="form-select-sm" name="" id="">
                                 <option>All</option>
                                 <option>Subscribed</option>
                             </select>
@@ -76,14 +76,24 @@
                         </div>
                     </div>
                 </aside>
-                <section class="group-chat px-4">
-                    <div class="receiver-msg">
-                        Lorem ipsum dolor sit amet amet, eget rhoncus, pulvinar, justo ligula.
-                        Dolor, eros ipsum odio, neque, lobortis lectus tristique dictumst id diam urna, mattis viverra id.
+                <section class="group-chat px-4 py-4">
+                    <div class="msg-container clearfix">
+                        <div class="receiver-msg">
+                            Lorem ipsum dolor sit amet amet, eget rhoncus, pulvinar, justo ligula.
+                            Dolor, eros ipsum odio, neque, lobortis lectus tristique dictumst id diam urna, mattis viverra id.
+                        </div>
+                        <div class="sender-msg float-end">
+                            Lorem ipsum dolor sit amet amet, eget rhoncus, pulvinar, justo ligula.
+                            Dolor, eros ipsum odio, neque, lobortis lectus tristique dictumst id diam urna, mattis viverra id.
+                        </div>
                     </div>
-                    <div class="sender-msg float-end">
-                        Lorem ipsum dolor sit amet amet, eget rhoncus, pulvinar, justo ligula.
-                        Dolor, eros ipsum odio, neque, lobortis lectus tristique dictumst id diam urna, mattis viverra id.
+                    <div class="form-container py-2">
+                        <form action="" method="post">
+                            <div class="input-group">
+                                <textarea class="form-control" name="reply-box" id="" cols="30" rows="" placeholder="Reply Here..."></textarea>
+                                <button type="button" class="btn btn-outline-dark"><i class="fab fa-telegram-plane"></i></button>
+                            </div>
+                        </form>
                     </div>
                 </section>
             </div>

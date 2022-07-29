@@ -5,20 +5,20 @@
 }
 @font-face {
   font-family: fredoka;
-  src: local('fredoka'), url('../fonts/FredokaOne-Regular.ttf');
+  src: local('fredoka'), url('../../../assets/fonts/FredokaOne-Regular.ttf');
 }
 @font-face {
   font-family: couget;
-  src: local('couget'), url('../fonts/Courgette-Regular.ttf');
+  src: local('couget'), url('../../../assets/fonts/Courgette-Regular.ttf');
 }
 @font-face {
   font-family: kalam;
-  src: local('kalam'), url('../fonts/Kalam-Regular.ttf');
+  src: local('kalam'), url('../../../assets/fonts/Kalam-Regular.ttf');
 }
 
-.group .groups,.group-chat{
+/* .group .groups,.group-chat{
     border: 2px solid rebeccapurple;
-}
+} */
 .group .groups{
     width: 40%;
 }
@@ -73,6 +73,7 @@
   padding: 5px;
   border-radius: 10px;
   z-index: 1;
+  clear: both;
 }
 .group .group-chat .sender-msg::after{
   content: " ";
@@ -100,3 +101,10 @@
   bottom: -5px;
   z-index: -1;
 }
+
+.group .group-chat .input-group>textarea{
+resize: none;
+}
+.group .group-chat .input-group>button{
+  width: 2.5rem;
+  }
