@@ -28,7 +28,7 @@
                 <form action="" method="post">
                     <div class="mb-4 input-container">
                         <input type="text" autocomplete="off" class="" name="uname" id="" aria-describedby="helpId" placeholder="" required>
-                        <label for="" class="">User name</label>
+                        <label for="" class="">User name/Email</label>
                     </div>
                     <div class="mb-4 input-container">
                         <input type="password" autocomplete="off" class="" name="pwd" id="" aria-describedby="helpId" placeholder="" required>

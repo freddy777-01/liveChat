@@ -28,6 +28,10 @@
                 <form action="" method="post">
                     <div class="mb-4 input-container">
                         <input type="text" autocomplete="off" class="" name="uname" id="" aria-describedby="helpId" placeholder="" required>
+                        <label for="" class="">Full name</label>
+                    </div>
+                    <div class="mb-4 input-container">
+                        <input type="text" autocomplete="off" class="" name="uname" id="" aria-describedby="helpId" placeholder="" required>
                         <label for="" class="">User name</label>
                     </div>
                     <div class="mb-4 input-container">
@@ -37,6 +41,10 @@
                     <div class="mb-4 input-container">
                         <input type="password" autocomplete="off" class="" name="pwd" id="" aria-describedby="helpId" placeholder="" required>
                         <label for="" class="">Password</label>
+                    </div>
+                    <div class="mb-4 input-container">
+                        <input type="password" autocomplete="off" class="" name="pwd" id="" aria-describedby="helpId" placeholder="" required>
+                        <label for="" class="">Confirm Password</label>
                     </div>
                     <button type="submit" class="btn btn-lg btn-outline-dark float-end">Register</button>
 

@@ -108,3 +108,14 @@ resize: none;
 .group .group-chat .input-group>button{
   width: 2.5rem;
   }
+
+.user-chat .groups-container .agroup{
+padding: 0px 2rem 0px 3rem;
+}
+.user-chat .groups-container .agroup .agroup-icon{
+  width: 3rem;
+  height: 3rem;
+  text-align: center;
+border: 2px solid black;
+border-radius: 50%;
+}

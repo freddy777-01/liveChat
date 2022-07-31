@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../assets/fontawesome-free-5/css/all.min.css">
     <link rel="stylesheet" href="../assets/fontawesome-free-5/css/brands.min.css">
     <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/modalForm.css">
+    <link rel=" stylesheet" href="../assets/css/modalForm.css">
     <link rel="stylesheet" href="./assets/css/profile.css">
 </head>
 
@@ -52,7 +52,7 @@
             </div>
             <div class="mt-5">
                 <button type="button" class="btn btn-lg btn-outline-dark mx-3">
-                    <a href="#">
+                    <a href="../chats/user/">
                         online users
                     </a>
                     <span class="online"></span>
