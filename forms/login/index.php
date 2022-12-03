@@ -42,10 +42,10 @@
         </div>
     </main>
 
-    <script src="../assets/js/jquery-3.6.0.min.js"></script>
-    <script src="../assets/bootstrap-5/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/fontawesome-free-5/js/all.min.js"></script>
-    <script src="../assets/js/main_j.js"></script>
+    <script src="../../assets/js/jquery-3.6.0.min.js"></script>
+    <script src="../../assets/bootstrap-5/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/fontawesome-free-5/js/all.min.js"></script>
+    <script src="../../assets/js/main_j.js"></script>
 </body>
 
 </html>

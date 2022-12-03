@@ -45,8 +45,12 @@
                 <form action="" method="post" class="needs-validation">
                     <div class="first-block">
                         <div class="form-floating">
-                            <input type="text" class="form-control" name="fullName" id="full-name" placeholder="full name">
-                            <label for="full-name">Full name</label>
+                            <input type="text" class="form-control" name="first_name" id="full-name" placeholder="first_name">
+                            <label for="full-name">First name</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" name="last_name" id="full-name" placeholder="last_name">
+                            <label for="full-name">Last name</label>
                         </div>
                         <div class="form-floating my-2">
                             <input type="text" class="form-control needs-validation" name="userName" id="user-name" placeholder="user name">
@@ -122,6 +126,8 @@
                     reader.readAsDataURL(this.files[0])
                 }
             })
+
+            
         });
     </script>
 </body>

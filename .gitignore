@@ -98,3 +98,5 @@ assets/fontawesome-free-5/sprites
 assets/fontawesome-free-5/svgs
 assets/fontawesome-free-5/webfonts
 assets/fontawesome-free-5/*.txt
+
+/vendor/

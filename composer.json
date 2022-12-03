@@ -1,0 +1,17 @@
+{
+    "name": "mk-pc/live-chat",
+    "description": "LiveChat web Application",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "LiveChat\\src\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "freddy777-01",
+            "email": "fred45722@gmail.com"
+        }
+    ],
+    "require": {}
+}

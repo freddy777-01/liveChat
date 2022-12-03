@@ -1,4 +1,7 @@
 <?php
+
+namespace LiveChat\src\Models;
+
 class User
 {
     private $first_name;

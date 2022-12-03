@@ -1,14 +1,14 @@
-DROP TABLE *;
-
 CREATE TABLE USERS (
 id INT NOT NULL AUTO_INCREMENT,
-first_name VARCHAR(30),
-last_name VARCHAR(30),
+first_name VARCHAR(30) NOT NULL,
+last_name VARCHAR(30) NOT NULL,
 user_name VARCHAR(30) UNIQUE,
-email VARCHAR(30) UNIQUE,
+email VARCHAR(30) UNIQUE NOT NULL,
 gender VARCHAR(10),
 about VARCHAR(200),
-created_at DATE,
+password VARCHAR(100),
+created_at TIMESTAMP,
+updated_at TIMESTAMP,
 PRIMARY KEY (id)
 );
 
@@ -17,7 +17,7 @@ id INT NOT NULL AUTO_INCREMENT,
 NAME VARCHAR(30),
 `about` VARCHAR(30),
 OWNER INT,
-created_at DATE,
+created_at TIMESTAMP,
 PRIMARY KEY (id),
 FOREIGN KEY (OWNER) REFERENCES USERS(id)
 );
@@ -27,7 +27,7 @@ id INT AUTO_INCREMENT,
 from_user INT,
 to_user INT,
 msg VARCHAR(255),
-created_at DATE,
+created_at TIMESTAMP,
 PRIMARY KEY (id),
 FOREIGN KEY (from_user) REFERENCES USERS(id),
 FOREIGN KEY (to_user) REFERENCES USERS(id)
@@ -37,7 +37,7 @@ CREATE TABLE GROUPS_CHATS(
 id INT AUTO_INCREMENT,
 from_user INT,
 msg VARCHAR(255),
-created_at DATE,
+created_at TIMESTAMP,
 PRIMARY KEY (id)
 );
 
@@ -45,7 +45,7 @@ CREATE TABLE GROUPS_SUBSCRIBERS(
 id INT AUTO_INCREMENT,
 group_id INT,
 user_id INT,
-created_at DATE,
+created_at TIMESTAMP,
 PRIMARY KEY (id),
 FOREIGN KEY (group_id) REFERENCES `GROUPS`(id),
 FOREIGN KEY (user_id) REFERENCES USERS(id)
