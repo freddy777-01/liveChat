@@ -31,7 +31,7 @@
                         <label for="" class="">User name/Email</label>
                     </div>
                     <div class="mb-4 input-container">
-                        <input type="password" autocomplete="off" class="" name="pwd" id="" aria-describedby="helpId" placeholder="" required>
+                        <input type="password" autocomplete="off" class="" name="password" id="" aria-describedby="helpId" placeholder="" required>
                         <label for="" class="">Password</label>
                     </div>
                     <button type="submit" class="btn btn-lg btn-outline-dark float-end">Login</button>

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../../assets/fontawesome-free-5/css/all.min.css">
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/forms.css">
-    <title>Login</title>
+    <title>Signup to LiveChat</title>
 </head>
 
 <body>
@@ -28,29 +28,31 @@
                 <form action="" method="post" id="register-form">
                     <input type="hidden" name="request" value="registerUser">
                     <div class="mb-4 input-container">
-                        <input type="text" autocomplete="off" class="" name="firstName" aria-describedby="helpId" placeholder="" required>
+                        <input type="text" autocomplete="off" class="" name="first_name" aria-describedby="helpId" placeholder="" required>
                         <label for="" class="">First name</label>
                     </div>
                     <div class="mb-4 input-container">
-                        <input type="text" autocomplete="off" class="" name="lastName" aria-describedby="helpId" placeholder="" required>
+                        <input type="text" autocomplete="off" class="" name="last_name" aria-describedby="helpId" placeholder="" required>
                         <label for="" class="">Last name</label>
                     </div>
-                    <div class="mb-4 input-container">
+                    <!--  <div class="mb-4 input-container">
                         <input type="text" autocomplete="off" class="" name="userName" aria-describedby="helpId" placeholder="" required>
                         <label for="" class="">User name</label>
-                    </div>
+                        <span class="erMsg text-danger p-4 font-italic"></span>
+                    </div> -->
                     <div class="mb-4 input-container">
                         <input type="email" autocomplete="off" class="" name="email" aria-describedby="helpId" placeholder="" required>
                         <label for="" class="">Email</label>
                     </div>
                     <div class="mb-4 input-container">
-                        <input type="password" autocomplete="off" class="" name="first_pwd" aria-describedby="helpId" placeholder="" required>
+                        <input type="password" autocomplete="off" class="" name="pasword" aria-describedby="helpId" placeholder="" required>
                         <label for="" class="">Password</label>
                     </div>
-                    <div class="mb-4 input-container">
+                    <!--     <div class="mb-4 input-container">
                         <input type="password" autocomplete="off" class="" name="second_pwd" aria-describedby="helpId" placeholder="" required>
                         <label for="" class="">Confirm Password</label>
-                    </div>
+                         <span class="erMsg text-danger p-4 font-italic"></span>
+                    </div> -->
                     <button type="submit" class="btn btn-lg btn-outline-dark float-end" id="register-btn">Register</button>
 
                 </form>
@@ -76,9 +78,44 @@
                     function(data, status) {
                         if (status == 'success') {
                             console.log("Submitted");
-                            console.log("\n" + data);
+                            // error msg testing
+                            // console.log(data);
+                            let dataObj = JSON.parse(data);
+                            switch (JSON.parse(data)['type']) {
+                                case "input_error":
+                                    $(":input").each(function(i, el) {
+                                        if ($(this).attr("name") === dataObj['context']['field_name']) {
+                                            $('.erMsg').remove();
+                                            $(this).parent().append('<span class = "erMsg text-danger p-4 font-italic">' + dataObj['context']['msg'] + '</span>')
+                                            setTimeout(() => {
+                                                $('.erMsg').hide()
+                                            }, 4000);
+                                        }
+                                    })
+                                    break;
+                                case "success":
+                                    console.log(dataObj["context"]["msg"]);
+                                    break;
+                                case "conn_error":
+                                    console.log(dataObj["context"]["msg"]);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            /*    if (JSON.parse(data)['type'] === "input_error") {
+                                   let errorObj = JSON.parse(data);
+                                   $(":input").each(function(i, el) {
+                                       if ($(this).attr("name") === errorObj['context']['field_name']) {
+                                           $('.erMsg').remove();
+                                           $(this).parent().append('<span class = "erMsg text-danger p-4 font-italic">' + errorObj['context']['msg'] + '</span>')
+                                           setTimeout(() => {
+                                               $('.erMsg').hide()
+                                           }, 4000);
+                                       }
+                                   })
+                               } */
                         }
-                    })
+                    }, )
             })
         });
     </script>

@@ -2,35 +2,39 @@
 
 namespace LiveChat\src\Controllers;
 
+use Exception;
 use LiveChat\src\Models\User;
 use LiveChat\src\Database\Crud;
+use LiveChat\src\Database\Connect;
+use LiveChat\src\Utility\Validator;
 
-
-class UserController extends User implements Crud
+class UserController extends Connect implements Crud
 {
 
-    private $con;
-    function __construct()
-    {
-        include_once '../Database/Connect.php';
-        $this->con = $conn;
-    }
-    public static function backEnd($request)
+    public static function validator($request)
     {
         array_shift($request);
-        return $request;
+        // $validData = Validator::validate($request);
+        // return Validator::testInputs($validData);
+        return Validator::validate($request);
     }
     public static function CreateObj($request)
     {
+        // return count($data);
         try {
-            $sql = 'INSERT INTO Users(first_name,last_name,email) VALUES(?,?,?,?)';
-            $stmt = self::$con->prepare($sql);
-            $result = $stmt->execute([$request['firstName'], $request['lastName'], $request['email']]);
-            if ($result) {
-                return true;
+            // $data = self::validator($request);
+            $sql = "INSERT INTO users(first_name,last_name,email,pasword) VALUES(:first_name,:last_name,:email,:pasword)";
+            $stmt = parent::Con()->prepare($sql);
+            if (gettype(self::validator($request)) === "array") {
+                $result = $stmt->execute(self::validator($request));
+                if ($result) {
+                    return json_encode(array("type" => "success", "context" => array("msg" => "successfully signed up")));
+                } else {
+                    throw new Exception(json_encode(array("type" => "put_error", "context" => array("msg" => "something went wrong !,Try again"))), 1);
+                }
             }
-        } catch (\Exception $th) {
-            //throw $th;
+        } catch (\Exception $e) {
+            return $e->getMessage();
         }
     }
     public static function ReadObj($data)
