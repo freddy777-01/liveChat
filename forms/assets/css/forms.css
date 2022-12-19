@@ -47,15 +47,15 @@ section button, section>a{
     font-weight: bold;
 }
 
-.login-form header{
+.login-form header,header .d-flex{
     align-items: center;
     /* border: 1px solid coral; */
     max-height: 7rem;
     justify-content: space-between;
 }
-.login-form header >div{
+/* .login-form header >div{
     visibility: hidden;
-}
+} */
 .login-form header .btn{
     font-size: 30px;
     border: none;
@@ -64,4 +64,17 @@ section button, section>a{
 }
 .login-form header .btn:hover{
     color: #747474;
+}
+
+#alert-note {
+     width: 40rem;
+    position: absolute;
+    z-index: 1;
+    right: 3rem;
+}
+
+.erMsg{
+    width: 100%;
+    font-style: italic;
+/* border: 2px solid red; */
 }

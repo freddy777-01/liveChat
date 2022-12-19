@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['User'])) {
+    header("Location:/liveChat/");
+}
+print_r($_SESSION['User']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,16 +37,28 @@
                     <i class="fas fa-user    "></i>
                 </a>
             </li>
-            <li data-bs-toggle="tooltip" data-bs-placement="left" title="SignOut">
+            <li data-bs-toggle="tooltip" data-bs-placement="left" title="SignOut" id="logout-btn">
                 <a href="#">
                     <i class="fas fa-sign-out-alt    "></i>
                 </a>
             </li>
         </ul>
     </div>
+    <div class="" id="error-logger">
+    </div>
     <main class="container">
         <div class="profile showCase d-flex align-items-center justify-content-center flex-column justify-content-around">
-            <h1 class="h mb-4">welcome<span>User Freddy</span></h1>
+            <h1 class="h mb-4">welcome<span>
+                    <?php
+                    // if (isset($_SESSION['User'])) {
+                    if (isset($_SESSION['User']['user_name'])) {
+                        echo $_SESSION['User']['user_name'];
+                    } else {
+                        echo $_SESSION['User']['first_name'];
+                    }
+                    // }
+                    ?>
+                </span></h1>
             <img src="../assets/images/freddie..ctn.jpg" class="rounded-circle shadow-lg" alt="" srcset="">
             <div class="bio">
                 <p class="h3">About me</p>
@@ -142,9 +161,43 @@
     <script src="../assets/fontawesome-free-5/js/brands.min.js"></script>
     <script src="../assets/js/main_j.js"></script>
     <script>
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl)
+        $(function() {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+
+            function displayError(response, errType, msg) {
+                $('#error-logger #alert-note').remove();
+                $('#error-logger').html(`
+                <div class="alert alert-${errType} alert-dismissible" id="alert-note">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>${response}!</strong> ${msg}.
+                </div>`)
+                // setTimeout(() => {
+                $('#alert-note').fadeOut(5000);
+                // }, 3000);
+            }
+            // logout mechanisim
+            $('#logout-btn').click(function(e) {
+                e.preventDefault();
+                $.post("../Route.php", {
+                    'request': 'logout'
+                }, function(data, status) {
+                    if (status === 'success') {
+                        console.log(data);
+                        let dataObj = JSON.parse(data);
+                        switch (JSON.parse(data)['type']) {
+                            case "url":
+                                window.location.replace(dataObj["context"]["msg"])
+                                break;
+                            default:
+                                displayError("Failed", "danger", "Unkown Error")
+                                break;
+                        }
+                    }
+                }, )
+            })
         })
     </script>
 </body>

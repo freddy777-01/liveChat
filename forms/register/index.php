@@ -14,13 +14,16 @@
 
 <body>
     <main class="container login-form">
-        <header class="d-flex">
-            <div class="">
+        <header class="">
+            <div class="d-flex">
+                <div class=""></div>
+                <h2 class="h text-center my-5">Sign up</h2>
+                <a href="../../" class="btn btn-outline-dark text-decoration-none">
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                </a>
             </div>
-            <h2 class="h text-center my-5">Sign up</h2>
-            <a href="../../" class="btn btn-outline-dark text-decoration-none">
-                <i class="fa fa-home" aria-hidden="true"></i>
-            </a>
+            <div class="" id="error-logger">
+            </div>
         </header>
         <div class="d-flex align-items-center">
 
@@ -70,6 +73,17 @@
     <script src="../../assets/js/main_j.js"></script>
     <script>
         $(function() {
+            function displayError(response, errType, msg) {
+                $('#error-logger #alert-note').remove();
+                $('#error-logger').html(`
+                <div class="alert alert-${errType} alert-dismissible" id="alert-note">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>${response}!</strong> ${msg}.
+                </div>`)
+                // setTimeout(() => {
+                $('#alert-note').fadeOut(5000);
+                // }, 3000);
+            }
             $("#register-btn").click(function(e) {
                 e.preventDefault();
                 // console.log($("#register-form").serializeArray());
@@ -86,34 +100,25 @@
                                     $(":input").each(function(i, el) {
                                         if ($(this).attr("name") === dataObj['context']['field_name']) {
                                             $('.erMsg').remove();
-                                            $(this).parent().append('<span class = "erMsg text-danger p-4 font-italic">' + dataObj['context']['msg'] + '</span>')
-                                            setTimeout(() => {
-                                                $('.erMsg').hide()
-                                            }, 4000);
+                                            $(this).parent().append('<div class = "erMsg text-danger text-center font-italic mx-auto">' + dataObj['context']['msg'] + '</div>')
+                                            $('.erMsg').fadeOut(4000)
                                         }
                                     })
                                     break;
                                 case "success":
                                     console.log(dataObj["context"]["msg"]);
+                                    displayError("Success", "success", dataObj["context"]["msg"])
                                     break;
                                 case "conn_error":
-                                    console.log(dataObj["context"]["msg"]);
+                                    // console.log(dataObj["context"]["msg"]);
+                                    displayError("Failed", "danger", dataObj["context"]["msg"])
                                     break;
                                 default:
+                                    displayError("Failed", "danger", dataObj["context"]["msg"])
                                     break;
                             }
-                            /*    if (JSON.parse(data)['type'] === "input_error") {
-                                   let errorObj = JSON.parse(data);
-                                   $(":input").each(function(i, el) {
-                                       if ($(this).attr("name") === errorObj['context']['field_name']) {
-                                           $('.erMsg').remove();
-                                           $(this).parent().append('<span class = "erMsg text-danger p-4 font-italic">' + errorObj['context']['msg'] + '</span>')
-                                           setTimeout(() => {
-                                               $('.erMsg').hide()
-                                           }, 4000);
-                                       }
-                                   })
-                               } */
+                        } else {
+                            displayError("Failed", "danger", "There was unknown error !, Please try again");
                         }
                     }, )
             })

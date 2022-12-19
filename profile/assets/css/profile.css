@@ -1,4 +1,4 @@
-button{
+button,.link-btn{
     font-family: kalam;
     font-weight: bold;
 }
@@ -82,4 +82,16 @@ button{
 }
 .setting .image-block .image-input input:hover +.image-icon .fa-icon{
     visibility: visible;
+}
+#alert-note {
+     width: 40rem;
+    position: absolute;
+    z-index: 1;
+    right: 3rem;
+}
+
+.erMsg{
+    width: 100%;
+    font-style: italic;
+/* border: 2px solid red; */
 }

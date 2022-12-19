@@ -83,4 +83,4 @@ class User
     }
 }
 
-$User = new User();
+// $User = new User();
