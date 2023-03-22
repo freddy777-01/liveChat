@@ -24,6 +24,13 @@ switch ($_POST['request']) {
     case 'updateUser':
         print_r(UserController::Update($_POST));
         break;
+    case 'updatePassword':
+        print_r(UserController::Update($_POST));
+        break;
+    case 'image':
+        print_r(UserController::Upload($_POST, $_FILES));
+        // print_r($_POST['request']);
+        break;
     default:
         echo 'Hello';
         break;

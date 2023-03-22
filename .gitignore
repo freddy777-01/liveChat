@@ -100,3 +100,5 @@ assets/fontawesome-free-5/webfonts
 assets/fontawesome-free-5/*.txt
 
 /vendor/
+
+uploads/

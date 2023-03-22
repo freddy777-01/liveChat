@@ -83,6 +83,10 @@ button,.link-btn{
 .setting .image-block .image-input input:hover +.image-icon .fa-icon{
     visibility: visible;
 }
+.setting .image-block #change-profile-image{
+    display: none;
+}
+/* end of setting page */
 #alert-note {
      width: 40rem;
     position: absolute;

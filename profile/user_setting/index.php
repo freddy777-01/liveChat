@@ -99,10 +99,11 @@ print_r($_SESSION['User']);
                 </div>
             </div>
             <div class="image-block w-100">
-                <div class="h2 text-center mb-5">New photo here</div>
-                <form action="" method="post" enctype="multipart/form-data" class="text-center">
+                <div class="h2 text-center mb-5">Profile Image</div>
+                <form action="" method="post" enctype="multipart/form-data" class="text-center" id="upload-form">
+                    <input type="hidden" name="request" value="image">
                     <div class="image-input ">
-                        <input type="file" name="profileImage" id="">
+                        <input type="file" name="file" id="">
                         <span class="image-icon">
                             <span class="fa-icon">
                                 <i class="fa fa-camera" aria-hidden="true"></i>
@@ -110,7 +111,8 @@ print_r($_SESSION['User']);
                             <img src="../assets/images/person_FILL0.svg" alt="" srcset="">
                         </span>
                     </div>
-                    <button type="submit" class="btn btn-outline-dark my-3 w-25 mx-auto">Save</button>
+                    <button class="btn btn-outline-dark my-3 w-25" id="change-profile-image"> Set as Profile Picture</button>
+                    <button type="submit" class="btn btn-outline-dark my-3 w-25 mx-auto" id="upload-image">Save</button>
                 </form>
             </div>
         </div>
@@ -147,20 +149,58 @@ print_r($_SESSION['User']);
                 return new bootstrap.Tooltip(tooltipTriggerEl)
             })
 
+            /* Image Upload Mechanisim */
             $(".image-input input").change(function() {
+                let file;
                 let validImage = ["image/jpeg", "image/png"]
                 if (validImage.includes(this.files[0]['type'])) {
                     // console.log($.inArray(this.files[0]['type'], validImage));
                     let reader = new FileReader();
                     reader.onload = function(e) {
+                        file = e.target.result;
                         $(".image-input .image-icon img").attr('src', e.target.result);
                     }
                     reader.readAsDataURL(this.files[0])
+                    // Image Upload button clicked
+                    $("#upload-form").submit(function(e) {
+                        e.preventDefault();
+                        // let formData = new FormData(this)
+                        // console.log(formData.get('file'));
+                        // let req = $(this).children("[name='request']").val();
+                        $.ajaxSetup({
+                            contentType: false,
+                            processData: false
+                        })
+                        $.post("../../Route.php", new FormData(this),
+                            function(data, status) {
+                                if (status === 'success') {
+                                    console.log(data);
+                                    let dataObj = JSON.parse(data);
+                                    switch (JSON.parse(data)['type']) {
+                                        case "file_error":
+                                            displayError("Failed", "danger", dataObj["context"]["msg"])
+                                            break;
+                                        case "success":
+                                            displayError("Success", "success", dataObj["context"]["msg"])
+                                            break;
+                                        default:
+                                            displayError("Failed", "danger", "Unkown Error")
+                                            break;
+                                    }
+                                    $("#change-profile-image").show();
+                                }
+
+                            }, )
+                    })
                 } else {
                     displayError("Failed", "danger", "Please Choose and Image !");
                     // console.log("not image");
                 }
             })
+            /* $("#upload-image").click(function(e) {
+                e.preventDefault();
+            }) */
+            /* End Image Upload */
 
             // logout mechanisim
             $('#logout-btn').click(function(e) {

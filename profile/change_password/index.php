@@ -57,9 +57,10 @@ print_r($_SESSION['User']);
                             <input type="password" class="form-control" name="pasword" id="password" placeholder="Password">
                             <label for="password">Password</label>
                         </div>
-                        <div class="form-floating mt-1">
+                        <div class="form-floating mt-1 d-flex align-items-center" id="confirm-pwd-container">
                             <input type="password" class="form-control" name="conf_pasword" id="confirm-pwd" placeholder="Confirm Password">
                             <label for="confirm-pwd">Confirm Password</label>
+                            <span id="error-icon" class="text-center"></span>
                         </div>
                     </div>
                     <div class="form-footer d-flex justify-content-end">
@@ -121,6 +122,39 @@ print_r($_SESSION['User']);
                 }, )
             })
 
+            $('#confirm-pwd').keyup(function(e) {
+                if ($('#password').val() === e.target.value) {
+                    $('#error-icon').html('<i class="fas fa-check-circle text-success m-2"></i>')
+                } else {
+                    $('#error-icon').html('<i class="fas fa-times-circle text-danger m-2"></i>')
+
+                }
+            })
+            $('#user-inf button').click(function(e) {
+                e.preventDefault()
+                // console.log($('#password').val());
+                if ($('#password').val() !== '' && ($('#password').val() === $('#confirm-pwd').val())) {
+                    $.post("../../Route.php", {
+                        'request': 'updatePassword',
+                        'pasword': $('#password').val()
+                    }, function(data, status) {
+                        if (status === 'success') {
+                            // console.log(data);
+                            let dataObj = JSON.parse(data);
+                            switch (JSON.parse(data)['type']) {
+                                case "success":
+                                    displayError("Success", "success", dataObj["context"]["msg"])
+                                    break;
+                                default:
+                                    displayError("Failed", "danger", "Unkown Error")
+                                    break;
+                            }
+                        }
+                    }, )
+                } else {
+                    displayError("Failed", "danger", "Please Confirm your password")
+                }
+            })
 
         });
     </script>

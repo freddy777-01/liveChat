@@ -83,7 +83,7 @@ if (isset($_SESSION['User'])) {
                             let dataObj = JSON.parse(data);
                             switch (JSON.parse(data)['type']) {
                                 case "error":
-                                    console.log(dataObj["context"]["msg"]);
+                                    // console.log(dataObj["context"]["msg"]);
                                     displayError("Failed", "danger", dataObj["context"]["msg"])
                                     break;
                                 case "url":
