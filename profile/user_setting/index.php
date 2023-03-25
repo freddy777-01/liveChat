@@ -90,6 +90,9 @@ print_r($_SESSION['User']);
                     </div>
                 </form>
                 <div class="d-grid gap-2 mt-3">
+                    <a name="" id="" class="link-btn btn btn-outline-dark btn-block" href="/liveChat/profile/my_images/" role="button">
+                        Change Profile Image
+                    </a>
                     <a name="" id="" class="link-btn btn btn-outline-dark btn-block" href="/liveChat/profile/change_password/" role="button">
                         Change Password
                     </a>
@@ -111,8 +114,8 @@ print_r($_SESSION['User']);
                             <img src="../assets/images/person_FILL0.svg" alt="" srcset="">
                         </span>
                     </div>
-                    <button class="btn btn-outline-dark my-3 w-25" id="change-profile-image"> Set as Profile Picture</button>
-                    <button type="submit" class="btn btn-outline-dark my-3 w-25 mx-auto" id="upload-image">Save</button>
+                    <!-- <button class="btn btn-outline-dark my-3 w-25" id="change-profile-image"> Set as Profile Picture</button> -->
+                    <button type="submit" class="btn btn-outline-dark my-3 w-25 mx-auto" id="upload-image" disabled>Save</button>
                 </form>
             </div>
         </div>
@@ -130,6 +133,7 @@ print_r($_SESSION['User']);
     <script src="../../assets/js/main_j.js"></script>
     <script>
         $(function() {
+            let uploadImageEndabled = true;
 
             function displayError(response, errType, msg) {
                 $('#error-logger #alert-note').remove();
@@ -143,6 +147,7 @@ print_r($_SESSION['User']);
                 // }, 3000);
             }
             // displayError("Failed", "danger", "There was unknown error !, Please try again");
+            // $('#upload-image').prop('disabled', uploadImageEndabled); // disabling save button after page is fully loaded
 
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
             var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
@@ -159,8 +164,10 @@ print_r($_SESSION['User']);
                     reader.onload = function(e) {
                         file = e.target.result;
                         $(".image-input .image-icon img").attr('src', e.target.result);
+                        $('#upload-image').prop('disabled', !uploadImageEndabled); // enabling save button after image selection
                     }
                     reader.readAsDataURL(this.files[0])
+
                     // Image Upload button clicked
                     $("#upload-form").submit(function(e) {
                         e.preventDefault();
@@ -187,6 +194,8 @@ print_r($_SESSION['User']);
                                             displayError("Failed", "danger", "Unkown Error")
                                             break;
                                     }
+                                    // $("upload-image").hide();
+                                    $('#upload-image').prop('disabled', uploadImageEndabled); // disabling save button after page is fully loaded
                                     $("#change-profile-image").show();
                                 }
 
@@ -200,6 +209,9 @@ print_r($_SESSION['User']);
             /* $("#upload-image").click(function(e) {
                 e.preventDefault();
             }) */
+            $("#change-profile-image").click(function(e) {
+                e.preventDefault();
+            })
             /* End Image Upload */
 
             // logout mechanisim

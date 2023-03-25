@@ -59,7 +59,7 @@ print_r($_SESSION['User']);
                     // }
                     ?>
                 </span></h1>
-            <img src="../assets/images/freddie..ctn.jpg" class="rounded-circle shadow-lg" alt="" srcset="">
+            <img src="../assets/images/freddie..ctn.jpg" class="rounded-circle shadow-lg" id="profile-image" alt="" srcset="">
             <div class="bio">
                 <p class="h3">About me</p>
                 <p>
@@ -198,6 +198,31 @@ print_r($_SESSION['User']);
                     }
                 }, )
             })
+            // End of logout mechanisism
+
+            // Getting Profile Image
+            $.post("../Route.php", {
+                'request': 'get_profile_image',
+                'id': '<?php echo $_SESSION['User']['id']; ?>'
+            }, function(data, status) {
+                if (status === 'success') {
+                    // console.log(data);
+                    let dataObj = JSON.parse(data);
+                    // console.log(dataObj['context']['profile_image']);
+                    if (dataObj['context']['profile_image'] == 'null') {
+
+                        $('#profile-image').attr({
+                            'src': '../assets/images/freddie..ctn.jpg'
+                        })
+                    } else {
+                        $('#profile-image').attr({
+                            'src': '../uploads/' + dataObj['context']['profile_image']
+                        })
+
+                    }
+                }
+            }, );
+            // End of Getting Profile Image
         })
     </script>
 </body>

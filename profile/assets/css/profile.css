@@ -19,7 +19,7 @@ button,.link-btn{
     border-radius: 50px;
     background-color: #00d100;
 }
-.profile>.h{
+.h{
     font-size: 30px;
 }
 .profile>.h span{
@@ -86,7 +86,17 @@ button,.link-btn{
 .setting .image-block #change-profile-image{
     display: none;
 }
+.setting .image-block #upload-image{
+    display: block;
+}
 /* end of setting page */
+.images header{
+    border: 2px solid green;
+    text-align: center;
+}
+/* Images Page */
+
+/* End of Images Page */
 #alert-note {
      width: 40rem;
     position: absolute;

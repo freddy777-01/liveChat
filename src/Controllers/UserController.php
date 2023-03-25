@@ -135,6 +135,7 @@ class UserController
                         break;
                 }
             }
+            array_splice($tempArray, 0, sizeof($tempArray)); // emptying an array
         } else {
             return Validator::ErrorMessage("error", array("msg" => "You are not Auathorized"));
         }
@@ -167,7 +168,7 @@ class UserController
                                         $imageName = $imageInfor['file_name'];
                                         $profilePictureUpdated = DB::$q->prepare("UPDATE users SET profile_image = ? WHERE id = ?")->execute([$imageName, $userId]);
                                         if ($profilePictureUpdated) {
-                                            return Validator::ErrorMessage("success", array("msg" => "Image Upload Success"), 1); // lastInsertId() return 0
+                                            return Validator::ErrorMessage("success", array("msg" => "Image Upload Success"), 1);
                                         }
                                     }
                                 }

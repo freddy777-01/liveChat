@@ -34,4 +34,16 @@ class Files
     public static function FileError($error)
     {
     }
+    public static function DeleteFile($file)
+    {
+        if (file_exists(self::$upload_dir . '' . $file)) {
+            if (unlink(self::$upload_dir . '' . $file)) {
+                return true;
+            } else {
+                throw new Exception(Validator::ErrorMessage("file_error", array("msg" => "Unable to delete the file")), 1);
+            }
+        } else {
+            throw new Exception(Validator::ErrorMessage("file_error", array("msg" => "File Does not exist")), 1);
+        }
+    }
 }
