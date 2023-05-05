@@ -1,0 +1,115 @@
+{
+  "todotree": {
+    "tree": [
+      {
+        "key": 1682938204536,
+        "children": [
+          {
+            "key": 1682938258233,
+            "children": [],
+            "todo": {
+              "content": "fix: when calling subscription() function groupFilter() function is called instead",
+              "id": 1682938258233,
+              "level": "default",
+              "done": true,
+              "start": 1682938258233,
+              "focus": false,
+              "end": 1683280953099
+            }
+          },
+          {
+            "key": 1683280918074,
+            "children": [],
+            "todo": {
+              "content": "change bell color if user is subscibed",
+              "id": 1683280918074,
+              "level": "default",
+              "done": true,
+              "start": 1683280918074,
+              "focus": false,
+              "end": 1683289500120
+            }
+          },
+          {
+            "key": 1683282891239,
+            "children": [],
+            "todo": {
+              "content": "add database functionality when to subscribed and to unscubscribe a group",
+              "id": 1683282891239,
+              "level": "default",
+              "done": true,
+              "start": 1683282891239,
+              "focus": false,
+              "end": 1683295811971
+            }
+          },
+          {
+            "key": 1683289471561,
+            "children": [],
+            "todo": {
+              "content": "prevent user from subscribing twices in the database",
+              "id": 1683289471561,
+              "level": "default",
+              "done": true,
+              "start": 1683289471561,
+              "focus": false,
+              "end": 1683295823878
+            }
+          }
+        ],
+        "todo": {
+          "content": "Subscription",
+          "id": 1682938204536,
+          "level": "default",
+          "done": false,
+          "start": 1682938204537,
+          "focus": false,
+          "end": 1682938247584,
+          "tip": "Create Subscription Mechanism"
+        }
+      },
+      {
+        "key": 1683282703169,
+        "children": [
+          {
+            "key": 1683282796611,
+            "children": [],
+            "todo": {
+              "content": "All groups request: return the groups that the current user is not the owner",
+              "id": 1683282796611,
+              "level": "default",
+              "done": true,
+              "start": 1683282796611,
+              "focus": false,
+              "end": 1683295833039
+            }
+          }
+        ],
+        "todo": {
+          "content": "Groups",
+          "id": 1683282703169,
+          "level": "default",
+          "done": false,
+          "start": 1683282703169,
+          "focus": false,
+          "end": 1683295819207
+        }
+      }
+    ],
+    "expandKeys": [
+      1682938258233,
+      1683282703169,
+      1682938204536
+    ],
+    "schema": "https://github.com/Saber2pr/vsc-ext-todolist/blob/master/src/api/type.ts#L3",
+    "add_mode": "bottom",
+    "virtual": false,
+    "showLine": false,
+    "playFontSize": 24,
+    "title": "liveChat",
+    "autoSort": false,
+    "showEndTime": false,
+    "lang": "en",
+    "version": "1683295833140"
+  }
+}

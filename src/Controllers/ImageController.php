@@ -95,7 +95,7 @@ class ImageController
                 $i = intval($key);
                 $result = DB::$q->exec("DELETE FROM user_uploads WHERE id = $i ");
                 if (self::isProfileImage($value)) {
-                    self::changeUserImage(array('image' => 'null'));
+                    self::changeUserImage(array('image' => NULL));
                 }
                 if ($result) {
                     Files::DeleteFile($value);

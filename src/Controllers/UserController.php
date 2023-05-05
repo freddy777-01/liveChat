@@ -147,7 +147,7 @@ class UserController
             $tempArray = array();
             try {
                 switch ($request['request']) {
-                    case 'image':
+                    case 'image_upload':
                         $imageType = array("jpg", "png", "jpeg");
                         $fileExtention = strtolower(pathinfo(basename($file['file']['name']), PATHINFO_EXTENSION));
                         if (in_array($fileExtention, $imageType)) {

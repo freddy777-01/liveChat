@@ -5,6 +5,7 @@ require_once './vendor/autoload.php';
 
 use ImageController as GlobalImageController;
 use LiveChat\src\Auth\Authenticate;
+use LiveChat\src\Controllers\GroupController;
 use LiveChat\src\Controllers\UserController;
 use LiveChat\src\Controllers\ImageController;
 
@@ -29,7 +30,7 @@ switch ($_POST['request']) {
     case 'updatePassword':
         print_r(UserController::Update($_POST));
         break;
-    case 'image':
+    case 'image_upload':
         print_r(UserController::Upload($_POST, $_FILES));
         // print_r($_POST['request']);
         break;
@@ -44,6 +45,17 @@ switch ($_POST['request']) {
         break;
     case 'delete_image':
         print_r(ImageController::deleteImage($_POST));
+        break;
+    case 'create_group':
+        print_r(GroupController::Create($_POST));
+        break;
+    case 'get_groups_by_filter':
+        print_r(GroupController::getGroupsByFilter($_POST));
+        break;
+    case 'subscription':
+        print_r(GroupController::Subscription($_POST));
+        /* if ('subscribe') {
+        } */
         break;
     default:
         echo 'Hello';

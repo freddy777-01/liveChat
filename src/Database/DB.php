@@ -28,5 +28,9 @@ class DB
             return json_encode(array("type" => "conn_error", "context" => array("msg" => "Database is not available")));
         }
     }
+    public static function close()
+    {
+        self::$q = null;
+    }
 }
 $DB = new DB();

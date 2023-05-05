@@ -119,13 +119,13 @@ print_r($_SESSION['User']);
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="row">
-                            <form action="" method="post">
+                            <form action="" method="post" id="create-group">
                                 <div class="mb-4 input-container">
-                                    <input type="text" autocomplete="off" class="" name="uname" id="" aria-describedby="helpId" placeholder="" required>
+                                    <input type="text" autocomplete="off" class="" name="group_name" id="" aria-describedby="helpId" placeholder="" required>
                                     <label for="" class="">Group name</label>
                                 </div>
                                 <div class="mb-4 input-container">
-                                    <input type="text" autocomplete="off" class="" name="pwd" id="" aria-describedby="helpId" placeholder="" required>
+                                    <input type="text" autocomplete="off" class="" name="about_group" id="" aria-describedby="helpId" placeholder="" required>
                                     <label for="" class="">About group</label>
                                 </div>
                                 <button type="submit" class="btn btn-lg btn-outline-dark float-end">Create</button>
@@ -209,7 +209,7 @@ print_r($_SESSION['User']);
                     // console.log(data);
                     let dataObj = JSON.parse(data);
                     // console.log(dataObj['context']['profile_image']);
-                    if (dataObj['context']['profile_image'] == 'null') {
+                    if (dataObj['context']['profile_image'] == 'null' || dataObj['context']['profile_image'] == null) {
 
                         $('#profile-image').attr({
                             'src': '../assets/images/freddie..ctn.jpg'
@@ -223,6 +223,37 @@ print_r($_SESSION['User']);
                 }
             }, );
             // End of Getting Profile Image
+
+            // Creating Group
+            $('#create-group').submit(function(e) {
+                e.preventDefault();
+                let data = $(this).serialize();
+                // console.log(data);
+                $.post("../Route.php", {
+                    'request': 'create_group',
+                    'data': data,
+                }, function(data, status) {
+                    // console.log(data);
+                    $('#modelId').modal('hide');
+                    if (status === 'success') {
+                        // console.log(data);
+                        let dataObj = JSON.parse(data);
+                        switch (JSON.parse(data)['type']) {
+                            case 'success':
+                                console.log(dataObj["context"]["msg"]);
+                                displayError("Success", "success", dataObj["context"]["msg"])
+                                break;
+                            case 'conn_error':
+                                displayError("Failed", "danger", dataObj["context"]["msg"])
+                                break;
+                            default:
+                                displayError("Failed", "danger", dataObj["context"]["msg"])
+                                break;
+                        }
+                    }
+                }, );
+            })
+            // End of Creating Group
         })
     </script>
 </body>

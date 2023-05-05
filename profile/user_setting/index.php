@@ -104,7 +104,7 @@ print_r($_SESSION['User']);
             <div class="image-block w-100">
                 <div class="h2 text-center mb-5">Profile Image</div>
                 <form action="" method="post" enctype="multipart/form-data" class="text-center" id="upload-form">
-                    <input type="hidden" name="request" value="image">
+                    <input type="hidden" name="request" value="image_upload">
                     <div class="image-input ">
                         <input type="file" name="file" id="">
                         <span class="image-icon">

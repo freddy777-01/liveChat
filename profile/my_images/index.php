@@ -52,6 +52,18 @@ print_r($_SESSION['User']);
             width: 100px;
             height: 7rem;
         }
+
+        .images .image-main-layout #image-form {
+            width: 97%;
+        }
+
+        .images .image-main-layout .form-btn {
+            width: 3%;
+        }
+
+        .show-hide {
+            visibility: hidden;
+        }
     </style>
 </head>
 
@@ -84,41 +96,17 @@ print_r($_SESSION['User']);
             <div class="" id="error-logger">
             </div>
         </header>
-        <div class="image-main-layout d-flex flex-row">
-            <form action="" method="post" id="image-form">
+        <div class="image-main-layout d-flex">
+            <form action="" method="post" id="image-form" class="">
                 <div class="image-list d-flex flex-wrap">
                 </div>
             </form>
-            <button type="submit" class="btn btn-outline-danger my-3 align-self-start" id="image-delete-btn" data-bs-toggle="modal" data-bs-target="#modelId"> Delete</button>
-        </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Confirm</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="text-center"><span class="text-warning display-5 mx-3"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></span>
-                                    <span class="text-danger h5">Are sure you want to delete this ?</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="d-flex justify-content-center" id="confirm-form">
-                            <button type="button" class="btn btn-outline-warning mx-2 d-block w-75" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-outline-danger mx-2 d-block w-75" id="confirm-delete-btn">ok</button>
-                        </div>
-                    </div>
-                </div>
+            <div class="form-btn">
+                <button type="submit" class="btn btn-outline-danger m-2 align-self-start" id="image-delete-btn"> Delete</button>
+                <button type="submit" class="btn btn-outline-warning m-2 align-self-start show-hide" id="confirm-delete-btn"> Confirm</button>
             </div>
         </div>
-        <!-- END OF MODAL -->
+
     </main>
     <!--  <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modelId">
         Launch
@@ -154,7 +142,6 @@ print_r($_SESSION['User']);
             })
 
 
-
             // logout mechanisim
             $('#logout-btn').click(function(e) {
                 e.preventDefault();
@@ -185,32 +172,31 @@ print_r($_SESSION['User']);
                 if (status === 'success') {
                     // console.log(data);
                     let dataObj = JSON.parse(data);
-                    // console.log(dataObj);
                     switch (JSON.parse(data)['type']) {
                         case 'images':
-                            dataObj['context'].forEach(el => {
-                                // console.log(el['file_name']);
-                                // let imgContainer = ;
-                                // let img =
+                            // console.log(dataObj['context'].length);
+                            $('.image-list').html('');
+                            dataObj['context'].length != 0 ?
+                                dataObj['context'].forEach(el => {
 
-                                $('.image-list').append($('<div></div>').attr({
-                                    'class': 'image-container',
-                                    'id': 'image_' + el['id'],
-                                    'data-file_name': el['file_name'],
-                                }).append($('<div class="image"></div>').append(
-                                        $('<input type="checkbox" class="form-check-input">').attr({
-                                            'name': el['id'],
-                                            'value': el['file_name'],
-                                        }),
-                                        $('<img>').attr({
-                                            'src': "../../uploads/" + el['file_name'] + " ",
-                                            'class': 'my-image mx-auto d-block rounded',
-                                        })),
-                                    $('<button class="btn btn-outline-dark my-3 w-100 change-profile-image"> Set as Profile Picture</button>').attr({
-                                        'data-change_image': el['file_name'],
-                                        'data-image_id': el['id'],
-                                    })))
-                            });
+                                    $('.image-list').append($('<div></div>').attr({
+                                        'class': 'image-container',
+                                        'id': 'image_' + el['id'],
+                                        'data-file_name': el['file_name'],
+                                    }).append($('<div class="image"></div>').append(
+                                            $('<input type="checkbox" class="form-check-input">').attr({
+                                                'name': el['id'],
+                                                'value': el['file_name'],
+                                            }),
+                                            $('<img>').attr({
+                                                'src': "../../uploads/" + el['file_name'] + " ",
+                                                'class': 'my-image mx-auto d-block rounded',
+                                            })),
+                                        $('<button class="btn btn-outline-dark my-3 w-100 change-profile-image"> Set as Profile Picture</button>').attr({
+                                            'data-change_image': el['file_name'],
+                                            'data-image_id': el['id'],
+                                        })))
+                                }) : $('.image-list').html('<div class="h3 text-warning">You have not upload image(S)<span class="mx-3"><i class="fas fa-sad-cry    "></i></span></div>')
                             $('.image-container .image').click(function() {
                                 if ($(this).children().first().is(':checked')) {
                                     $(this).children().first().prop('checked', false)
@@ -267,9 +253,12 @@ print_r($_SESSION['User']);
             }, );
             // End of getting automatic images
 
-            // Deleting mechanisikm
-            $("#confirm-delete-btn").click(function() {
+            // Deleting mechanisism
+            $('#image-delete-btn').click(function() {
+                $("#confirm-delete-btn").toggleClass("show-hide")
                 // console.log("about to delete image");
+            })
+            $("#confirm-delete-btn").click(function() {
                 $("#image-form").submit()
             })
             $("#image-form").submit(function(e) {
@@ -285,6 +274,7 @@ print_r($_SESSION['User']);
                             'data': formData
                         },
                         function(data, status) {
+                            $("#confirm-delete-btn").toggleClass("show-hide")
                             if (status === 'success') {
                                 console.log(data);
                                 let dataObj = JSON.parse(data);
