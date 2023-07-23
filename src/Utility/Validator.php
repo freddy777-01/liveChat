@@ -94,4 +94,15 @@ class Validator
             return filter_var($data, FILTER_VALIDATE_EMAIL);
         }
     }
+    public static function validateNumberOfWordsAndChars($data)
+    {
+        define("maxNumOfWords", 100);
+        $numberOfWords = str_word_count($data);
+        if ($numberOfWords > maxNumOfWords) {
+            throw new Exception(self::ErrorMessage("failed", array("msg" => "Number of words Exceeded 100")));
+        } else {
+
+            return true;
+        }
+    }
 }
