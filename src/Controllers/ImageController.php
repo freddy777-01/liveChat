@@ -16,7 +16,7 @@ class ImageController
         switch ($request['request']) {
             case 'user_images':
                 $UserId = $request['id'];
-                $result = DB::$q->query("SELECT id,user_id,file_name FROM user_uploads WHERE user_id = '$UserId' AND file_type ='image'")->fetchAll(PDO::FETCH_ASSOC);
+                $result = DB::GETALL("SELECT id,user_id,file_name FROM USER_UPLOADS WHERE user_id = '$UserId' AND file_type ='image'");
                 // return var_dump($result);
                 return Validator::ErrorMessage("images", $result);
                 # code...
@@ -31,7 +31,7 @@ class ImageController
     {
         if (Authenticate::checkSessionIsSet()) {
             try {
-                $result = DB::$q->prepare("UPDATE users SET profile_image = ? WHERE id = ?")->execute([$request['image'], $_SESSION['User']['id']]);
+                $result = DB::UPDATE("UPDATE USERS SET profile_image = ? WHERE id = ?", [$request['image'], $_SESSION['User']['id']]);
                 if ($result) {
                     return Validator::ErrorMessage("success", array("msg" => "Profile Image Updated"), 1);
                 }
@@ -53,7 +53,7 @@ class ImageController
     {
         try {
             $id = $request['id'];
-            $result = DB::$q->query("SELECT profile_image FROM users WHERE id = $id")->fetch(PDO::FETCH_ASSOC);
+            $result = DB::GET("SELECT profile_image FROM USERS WHERE id = $id");
             if ($result) {
                 return Validator::ErrorMessage("profileImage", $result);
             }
@@ -72,7 +72,7 @@ class ImageController
     {
         if (Authenticate::checkSessionIsSet()) {
             $id = $_SESSION['User']['id'];
-            $result = DB::$q->query("SELECT profile_image FROM users WHERE id = '$id'")->fetch(PDO::FETCH_ASSOC);
+            $result = DB::GET("SELECT profile_image FROM USERS WHERE id = '$id'");
             if ($result['profile_image'] == $data) {
                 return true;
             } else {
@@ -93,7 +93,7 @@ class ImageController
             $c = 0;
             foreach ($tempData as $key => $value) {
                 $i = intval($key);
-                $result = DB::$q->exec("DELETE FROM user_uploads WHERE id = $i ");
+                $result = DB::DELETE("DELETE FROM USER_UPLOADS WHERE id = $i ");
                 if (self::isProfileImage($value)) {
                     self::changeUserImage(array('image' => NULL));
                 }

@@ -4,8 +4,9 @@ namespace LiveChat\src\Database;
 
 interface Crud
 {
-    public static function ReadObj($data);
-    public static function DeleteObj($data);
-    public static function UpdateObj($data);
-    public static function CreateObj($data);
+    public static function GET($sql);
+    public static function GETALL($sql);
+    public static function DELETE($sql);
+    public static function UPDATE($sql, $data);
+    public static function CREATE($sql, $data);
 }

@@ -23,10 +23,9 @@ class UserController
         // return count($data);
         // try {
         // $data = self::validator($request);
-        $sql = "INSERT INTO users(first_name,last_name,email,pasword) VALUES(:first_name,:last_name,:email,:pasword)";
-        $stmt = DB::$q->prepare($sql);
+        // $sql = ;
         if (gettype($request) === "array") {
-            $result = $stmt->execute($request);
+            $result = DB::CREATE("INSERT INTO USERS(first_name,last_name,email,pasword) VALUES(:first_name,:last_name,:email,:pasword)", $request);
             if ($result) {
                 return Validator::ErrorMessage("success", array("msg" => "successfully signed up !, Please Signin"));
             } else {
@@ -44,7 +43,7 @@ class UserController
                     return Validator::ErrorMessage("error", array("msg" => "Email already exist !"));
                     break;
                 default:
-                    return $e->getMessage();
+                    return Validator::ErrorMessage("error", array("msg" => $e->getMessage()));
                     break;
             }
         } */
@@ -57,11 +56,11 @@ class UserController
                 $field = $data['data']['email'];
                 $pwd = $data['data']['pasword'];
                 if ($data['select'] === 'email') {
-                    $sql = "SELECT id,first_name, last_name,user_name,profile_image,email FROM users WHERE email = '$field' AND pasword = '$pwd'";
+                    $sql = "SELECT id,first_name, last_name,user_name,profile_image,email FROM USERS WHERE email = '$field' AND pasword = '$pwd'";
                 } else {
-                    $sql = "SELECT id,first_name, last_name,user_name,profile_image,email FROM users WHERE  user_name = '$field' AND pasword = '$pwd'";
+                    $sql = "SELECT id,first_name, last_name,user_name,profile_image,email FROM USERS WHERE  user_name = '$field' AND pasword = '$pwd'";
                 }
-                $result = DB::$q->query($sql)->fetch(PDO::FETCH_ASSOC);
+                $result = DB::GET($sql);
                 // return $result;
                 if ($result) {
                     return $result;
@@ -72,8 +71,8 @@ class UserController
                 break;
             case 'user':
                 $id = $data['id'];
-                $sql = "SELECT first_name, last_name,user_name,email FROM users WHERE id = '$id'";
-                $result = DB::$q->query($sql)->fetch(PDO::FETCH_ASSOC);
+                $sql = "SELECT first_name, last_name,user_name,email FROM USERS WHERE id = '$id'";
+                $result = DB::GET($sql);
                 return Validator::ErrorMessage("user", $result);
                 break;
             default:
@@ -95,7 +94,7 @@ class UserController
                         // if (strcmp($data['request'], 'updateUser') == 0) {
                         $data = Validator::RemoveFirstRequsetElement($data);
                         // $sql = "UPDATE users SET first_name = ?,last_name = ?,email= ? WHERE id = ?";
-                        $sql = "UPDATE users SET first_name = ?,last_name = ?,user_name = ?,email= ? WHERE id = ?";
+                        $sql = "UPDATE USERS SET first_name = ?,last_name = ?,user_name = ?,email= ? WHERE id = ?";
                         if (strlen($data['user_name']) == 0) {
                             foreach ($data as $key => $value) {
                                 if (strcmp($key, 'user_name') != 0) {
@@ -103,10 +102,10 @@ class UserController
                                 }
                             }
                             validator::ValidateEmail(validator::validate($tempArray));
-                            $result = DB::$q->prepare($sql)->execute([$tempArray['first_name'], $tempArray['last_name'], NULL, $tempArray['email'], $_SESSION['User']['id']]);
+                            $result = DB::UPDATE($sql, [$tempArray['first_name'], $tempArray['last_name'], NULL, $tempArray['email'], $_SESSION['User']['id']]);
                         } else {
                             validator::ValidateEmail(validator::validate($data));
-                            $result = DB::$q->prepare($sql)->execute([$data['first_name'], $data['last_name'], $data['user_name'], $data['email'], $_SESSION['User']['id']]);
+                            $result = DB::UPDATE($sql, [$data['first_name'], $data['last_name'], $data['user_name'], $data['email'], $_SESSION['User']['id']]);
                         }
                         if ($result) {
                             return Validator::ErrorMessage("success", array("msg" => "successfully updated"));
@@ -114,8 +113,8 @@ class UserController
                         // }
                         break;
                     case 'updatePassword':
-                        $sql = "UPDATE users SET pasword = ? WHERE id = ?";
-                        $result = DB::$q->prepare($sql)->execute([$data['pasword'], $_SESSION['User']['id']]);
+                        $sql = "UPDATE USERS SET pasword = ? WHERE id = ?";
+                        $result = DB::UPDATE($sql, [$data['pasword'], $_SESSION['User']['id']]);
                         if ($result) {
                             return Validator::ErrorMessage("success", array("msg" => "successfully password updated"));
                         }
@@ -158,15 +157,15 @@ class UserController
                                     /* $sql = "UPDATE users SET profile_image = ? WHERE id = ?";
                                     $result= parent::Con()->prepare($sql)->execute([$newFileName, $_SESSION['User']['id']]); */
 
-                                    $sql = "INSERT INTO user_uploads(user_id,file_name,file_type) VALUES(:user_id,:file_name,:file_type)";
-                                    $result = DB::$q->prepare($sql)->execute(array('user_id' => $_SESSION['User']['id'], 'file_name' => $newFileName, 'file_type' => 'image'));
+                                    $sql = "INSERT INTO USER_UPLOADS(user_id,file_name,file_type) VALUES(:user_id,:file_name,:file_type)";
+                                    $result = DB::CREATE($sql, array('user_id' => $_SESSION['User']['id'], 'file_name' => $newFileName, 'file_type' => 'image'));
                                     //this "$db->lastInsertId()" is used to get last inserted ID
-                                    $last_id = DB::$q->lastInsertId();
-                                    if ($result) {
-                                        $imageInfor = DB::$q->query("SELECT user_id,file_name FROM user_uploads WHERE id = '$last_id'")->fetch(PDO::FETCH_ASSOC);
+                                    $last_id = $result['lastInsertId'];
+                                    if ($result['result']) {
+                                        $imageInfor = DB::GET("SELECT user_id,file_name FROM user_uploads WHERE id = '$last_id'");
                                         $userId = $imageInfor['user_id'];
                                         $imageName = $imageInfor['file_name'];
-                                        $profilePictureUpdated = DB::$q->prepare("UPDATE users SET profile_image = ? WHERE id = ?")->execute([$imageName, $userId]);
+                                        $profilePictureUpdated = DB::update("UPDATE users SET profile_image = ? WHERE id = ?", [$imageName, $userId]);
                                         if ($profilePictureUpdated) {
                                             return Validator::ErrorMessage("success", array("msg" => "Image Upload Success"), 1);
                                         }
