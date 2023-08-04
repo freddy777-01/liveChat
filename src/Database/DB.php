@@ -69,7 +69,7 @@ class DB implements Crud
     public static function DELETE($sql)
     {
         $result = self::$con->exec($sql);
-        self::CLOSE();
+        // self::CLOSE();
         return $result;
     }
     public static function UPDATE($sql, $data)

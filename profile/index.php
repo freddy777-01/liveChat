@@ -125,8 +125,14 @@ print_r($_SESSION['User']);
                                     <label for="" class="">Group name</label>
                                 </div>
                                 <div class="mb-4 input-container">
-                                    <input type="text" autocomplete="off" class="" name="about_group" id="" aria-describedby="helpId" placeholder="" required>
+                                    <input type="text" autocomplete="off" class="" name="about_group" id="about_goup_input" aria-describedby="helpId" placeholder="" required>
                                     <label for="" class="">About group</label>
+                                    <div class="invalid-feedback">
+                                        Not more than 100 words
+                                    </div>
+                                    <div class="valid-feedback">
+                                        Looks good <i class="fas fa-check fa-sm"></i>
+                                    </div>
                                 </div>
                                 <button type="submit" class="btn btn-lg btn-outline-dark float-end">Create</button>
 
@@ -240,7 +246,7 @@ print_r($_SESSION['User']);
                         let dataObj = JSON.parse(data);
                         switch (JSON.parse(data)['type']) {
                             case 'success':
-                                console.log(dataObj["context"]["msg"]);
+                                // console.log(dataObj["context"]["msg"]);
                                 displayError("Success", "success", dataObj["context"]["msg"])
                                 break;
                             case 'conn_error':
@@ -254,6 +260,27 @@ print_r($_SESSION['User']);
                 }, );
             })
             // End of Creating Group
+
+            // Validating about_group input field number of characters
+            $('#about_goup_input').focus(function() {
+                const maxChar = 100;
+                let tempData;
+                $(this).keyup(function() {
+                    tempData = $(this).val().trim().split(" ");
+                    if (tempData.length > maxChar) {
+                        $(this).removeClass('is-valid')
+                        $(this).addClass('is-invalid')
+                    } else {
+                        $(this).removeClass('is-invalid')
+                        $(this).addClass('is-valid')
+
+                    }
+
+                })
+                // console.log("I have focus");
+            })
+            // End Validating about_group input field number of characters
+
         })
     </script>
 </body>

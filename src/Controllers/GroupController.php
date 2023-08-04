@@ -132,8 +132,33 @@ class GroupController
         }
         // return $request['data']['group_id'];
     }
-    public static function Delete()
+    public static function Delete($request)
     {
+        $groupId = $request['data']['group_id'];
+        $result = DB::GETALL("SELECT id FROM GROUPS_SUBSCRIBERS WHERE group_id = '$groupId'");
+        if ($result) {
+            foreach ($result as $key => $value) { // Removing all subscribers
+                $tempId = $value['id'];
+
+                // $t = DB::DELETE("DELETE FROM GROUPS_SUBSCRIBERS WHERE id = $value ");
+                var_dump(DB::DELETE("DELETE FROM GROUPS_SUBSCRIBERS WHERE id = $tempId "));
+                // return Validator::ErrorMessage("success", array("msg" => gettype($tempId)));
+                /* if (DB::DELETE("DELETE FROM GROUPS_SUBSCRIBERS WHERE id = $tempId ")) {
+                    // Do nothing
+                } else {
+
+                    throw new Exception(Validator::ErrorMessage("error", array("msg" => "Unkown Error Please try again")), 1);
+                } */
+            }
+            if (DB::DELETE("DELETE FROM `GROUPS` WHERE id = $groupId ")) {
+                return Validator::ErrorMessage("success", array("msg" => "agroup was deleted"));
+            }
+        } else { // incase no one subscribed to the group
+            /* if (DB::DELETE("DELETE FROM `GROUPS` WHERE id = $groupId ")) {
+                return Validator::ErrorMessage("success", array("msg" => "agroup was deleted"));
+            } */
+        }
+        // $result = DB::GETALL();
     }
     public static function Update()
     {

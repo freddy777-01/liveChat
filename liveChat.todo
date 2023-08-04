@@ -83,6 +83,56 @@
               "focus": false,
               "end": 1683295833039
             }
+          },
+          {
+            "key": 1688297589328,
+            "children": [],
+            "todo": {
+              "content": "user should create his/her group",
+              "id": 1688297589328,
+              "level": "default",
+              "done": true,
+              "start": 1688297589328,
+              "focus": false,
+              "end": 1689487435888
+            }
+          },
+          {
+            "key": 1688297606169,
+            "children": [],
+            "todo": {
+              "content": "user should delete his/her group",
+              "id": 1688297606169,
+              "level": "default",
+              "done": false,
+              "start": 1688297606169
+            }
+          },
+          {
+            "key": 1688297623662,
+            "children": [],
+            "todo": {
+              "content": "user can subscrbe to a group (subscribed group should have green color bell, unsubscibed have group black color bell)",
+              "id": 1688297623662,
+              "level": "default",
+              "done": true,
+              "start": 1688297623662,
+              "focus": false,
+              "end": 1688297720228
+            }
+          },
+          {
+            "key": 1688297695197,
+            "children": [],
+            "todo": {
+              "content": "user can subscribe to a group except his/her group",
+              "id": 1688297695197,
+              "level": "default",
+              "done": true,
+              "start": 1688297695197,
+              "focus": false,
+              "end": 1688297717838
+            }
           }
         ],
         "todo": {
@@ -97,19 +147,28 @@
       }
     ],
     "expandKeys": [
+      1682938204536,
       1682938258233,
-      1683282703169,
-      1682938204536
+      1683280918074,
+      1683282891239,
+      1683289471561,
+      1683282796611,
+      1688297589328,
+      1688297606169,
+      1688297623662,
+      1688297695197,
+      1683282703169
     ],
     "schema": "https://github.com/Saber2pr/vsc-ext-todolist/blob/master/src/api/type.ts#L3",
     "add_mode": "bottom",
-    "virtual": false,
+    "virtual": true,
     "showLine": false,
+    "restDays": [],
     "playFontSize": 24,
     "title": "liveChat",
     "autoSort": false,
-    "showEndTime": false,
+    "showEndTime": true,
     "lang": "en",
-    "version": "1683295833140"
+    "version": "1689487435995"
   }
 }

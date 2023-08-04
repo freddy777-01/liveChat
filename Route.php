@@ -57,6 +57,9 @@ switch ($_POST['request']) {
         /* if ('subscribe') {
         } */
         break;
+    case 'delete_group':
+        print_r(GroupController::Delete($_POST));
+        break;
     default:
         echo 'Hello';
         break;

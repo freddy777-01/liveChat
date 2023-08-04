@@ -93,7 +93,7 @@
                         if (status == 'success') {
                             console.log("Submitted");
                             // error msg testing
-                            // console.log(data);
+                            console.log(data);
                             let dataObj = JSON.parse(data);
                             switch (JSON.parse(data)['type']) {
                                 case "input_error":
@@ -110,7 +110,7 @@
                                     displayError("Success", "success", dataObj["context"]["msg"])
                                     break;
                                 case "conn_error":
-                                    // console.log(dataObj["context"]["msg"]);
+                                    console.log(dataObj["context"]["msg"]);
                                     displayError("Failed", "danger", dataObj["context"]["msg"])
                                     break;
                                 default:

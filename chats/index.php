@@ -132,13 +132,10 @@
             // }, 3000);
         }
         // subscription functionality
-        function subscription(d) {
-            $.post("../Route.php", {
-                'request': 'subscription',
-                data: d
-            }, function(data, status) {
+        function subscriptionAndDelete(d) {
+            $.post("../Route.php", d, function(data, status) {
+                console.log(data);
                 if (status === 'success') {
-                    console.log(data);
                     setTimeout(() => {
                         groupFilter($('#group-view-filter').val());
                     }, 1000);
@@ -171,18 +168,18 @@
                     // console.log(data);
                     let dataObj = JSON.parse(data);
                     if (typeof dataObj['context'] != 'string') {
-                        console.log(dataObj['context']);
+                        // console.log(dataObj['context']);
                         dataObj['context'].length != 0 ?
                             dataObj['context'].forEach(el => {
                                 $('.groups-container').append($('<div class="agroup my-3 d-flex justify-content-around align-items-center"></div>')
                                     .append('<span class="agroup-icon"><i class="fas fa-users    "></i></span>',
                                         $('<span class="agroup-name"></span>').append(`<p>${el['group_name']}</p>`),
-                                        `<span class="agroup-sub ${filter==='subscribes'?'text-success':null}" data-group_id=${el['id']}><i class="fas fa-bell    "></i></span>`
+                                        `<span class="agroup-sub ${filter==='subscribes'?'text-success':null}" data-group_id=${el['id']} data-filter_group=${filter}> ${filter==='my-groups'?'<i class="fas fa-trash    "></i>':'<i class="fas fa-bell    "></i>'}</span>`
                                     ))
                             }) : $('.groups-container').html('<div class="h3 text-warning">No groups available<span class="mx-3"><i class="fas fa-sad-cry    "></i></span></div>')
 
                         /* $('.agroup-sub').click((e) => {
-                            let t = e.target.parentElement.parentElement;
+          on                  let t = e.target.parentElement.parentElement;
                             let data = null;
                             switch (filter) {
                                 case "all-groups":
@@ -214,6 +211,11 @@
                         $('.groups-container').html('<div class="h3 text-warning">No groups available<span class="mx-3"><i class="fas fa-sad-cry    "></i></span></div>')
                     }
 
+                    $(".agroup-sub").hover(function() { //Hover color changing effect for trash icon
+                        $(this).css("color", `${filter==="my-groups"?"red":"green"}`)
+                    }, function() {
+                        $(this).css("color", "black")
+                    })
                 }
             }, );
         }
@@ -221,8 +223,54 @@
             let t = e.target.parentElement.parentElement;
             if (t.classList.contains("agroup-sub")) {
                 let data = null;
+                let requestAndData = null;
                 let filter = $('#group-view-filter').val();
-                if (filter === "all-groups") {
+                let filterGroup = $(t).data('filter_group')
+                switch (filterGroup) {
+                    case 'my-groups':
+                        requestAndData = {
+                            "request": "delete_group",
+                            "data": {
+                                group_id: $(t).data("group_id")
+                            }
+                        }
+                        subscriptionAndDelete(requestAndData)
+                        break;
+                    case 'all-groups':
+                        requestAndData = {
+                            "request": "subscription",
+                            "data": {
+                                requestTo: "subscribe",
+                                group_id: $(t).data("group_id")
+                            }
+                        }
+                        /* data = {
+                            requestTo: "subscribe",
+                            group_id: $(t).data("group_id")
+                        } */
+                        t.classList.add('text-success')
+                        subscriptionAndDelete(requestAndData)
+                        break;
+                    case 'subscribes':
+                        requestAndData = {
+                            "request": "subscription",
+                            "data": {
+                                requestTo: "unsubscribe",
+                                group_id: $(t).data("group_id")
+                            }
+                        }
+                        /* data = {
+                            requestTo: "unsubscribe",
+                            group_id: $(t).data("group_id")
+                        } */
+                        t.classList.remove('text-success')
+                        subscriptionAndDelete(requestAndData);
+                        break;
+                    default:
+                        displayError("Failed", "danger", "Unkown Error")
+                        break;
+                }
+                /* if (filter === "all-groups") {
                     data = {
                         requestTo: "subscribe",
                         group_id: $(t).data("group_id")
@@ -237,7 +285,7 @@
                     }
                     t.classList.remove('text-success')
                     subscription(data)
-                }
+                } */
             }
         })
         groupFilter($('#group-view-filter').val());
